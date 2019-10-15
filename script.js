@@ -1,12 +1,8 @@
-fetch('http://httpbin.org/json')
+fetch('http://httpbin.org/post', {
+  method: 'POST',
+  body: JSON.stringify({
+    msg: 'ok',
+  }),
+})
   .then((data) => data.json())
   .then((data) => console.log(data));
-
-async function doWork() {
-  const res = await fetch('http://httpbin.org/text');
-  const data = await res.text();
-
-  console.log(data);
-}
-
-doWork();
