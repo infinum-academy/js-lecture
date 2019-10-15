@@ -1,13 +1,21 @@
-const array = [1, 2, 3, 4, 5, 6, 7, 8];
+const array = [
+  {
+    firstName: 'a',
+    lastName: 'b',
+  },
+  {
+    firstName: 'a',
+    lastName: 'b',
+  },
+  {
+    firstName: 'a',
+    lastName: 'b',
+  },
+];
 
-const count = array.reduce(function(acc, curr) {
-  if (curr % 2 === 0) {
-    acc++;
-  }
-
-  return acc;
-}, 0);
-
-const sum = array.reduce(function(acc, curr) {
-  return acc + curr;
+const completeUsers = array.map(function(user) {
+  return {
+    fullName: `${user.firstName} ${user.lastName}`,
+    ...user,
+  };
 });
