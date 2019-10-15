@@ -1,9 +1,13 @@
-const accounts = [{ balance: 100.5 }, { balance: 0.5 }, { balance: -10.45 }];
+function getData() {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log('got the data.');
+      resolve();
+    }, 235 /* ms, ping to Tokyo */);
+  });
+}
 
-const negativeAccounts = accounts.filter((account) => {
-  return account.balance < 0;
-});
-
-const negativeAccountsS = accounts.filter((account) => account.balance < 0);
-
-const filterPre = (account) => account.balance < 0;
+getData()
+  .then(() => console.log('hello 1.'))
+  .then(getData)
+  .then(() => console.log('hello 2.'));
