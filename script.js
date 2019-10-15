@@ -6,16 +6,18 @@ function getData() {
   });
 }
 
-function getData2() {
-  return new Promise((_, reject) => {
-    setTimeout(() => {
-      reject({ msg: 'the data' });
-    }, 1000);
-  });
+async function doWork() {
+  const data = await getData();
+
+  return {
+    count: 4,
+    ...data,
+  };
 }
 
-getData()
-  .then(() => console.log('ok'))
-  .then(getData2)
-  .catch((data) => console.log('hello', data))
-  .then(() => console.log('ok2'));
+async function doWork2() {
+  const data = await doWork();
+  console.log(data);
+}
+
+doWork2().then(() => console.log('ok'));
