@@ -1,14 +1,9 @@
 const accounts = [{ balance: 100.5 }, { balance: 0.5 }, { balance: -10.45 }];
-console.log(this);
 
-function sayHello() {
-  console.log('hello ctx is', this);
+const negativeAccounts = accounts.filter((account) => {
+  return account.balance < 0;
+});
 
-  const saySmthElse = () => {
-    console.log('smth else ctx is', this);
-  };
+const negativeAccountsS = accounts.filter((account) => account.balance < 0);
 
-  saySmthElse();
-}
-
-sayHello.call({ name: 'hello world ' });
+const filterPre = (account) => account.balance < 0;
