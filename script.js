@@ -1,17 +1,21 @@
 function getData() {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const data = { msg: 'the data' };
-      console.log('got the data.');
-      resolve(data);
-    }, 235 /* ms, ping to Tokyo */);
+      resolve({ msg: 'the data' });
+    }, 1000);
+  });
+}
+
+function getData2() {
+  return new Promise((_, reject) => {
+    setTimeout(() => {
+      reject({ msg: 'the data' });
+    }, 1000);
   });
 }
 
 getData()
-  .then((data) => {
-    console.log(data);
-
-    return 555;
-  })
-  .then((data2) => console.log(data2));
+  .then(() => console.log('ok'))
+  .then(getData2)
+  .catch((data) => console.log('hello', data))
+  .then(() => console.log('ok2'));
