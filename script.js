@@ -1,23 +1,12 @@
-function getData() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ msg: 'the data' });
-    }, 1000);
-  });
-}
+fetch('http://httpbin.org/json')
+  .then((data) => data.json())
+  .then((data) => console.log(data));
 
 async function doWork() {
-  const data = await getData();
+  const res = await fetch('http://httpbin.org/text');
+  const data = await res.text();
 
-  return {
-    count: 4,
-    ...data,
-  };
-}
-
-async function doWork2() {
-  const data = await doWork();
   console.log(data);
 }
 
-doWork2().then(() => console.log('ok'));
+doWork();
