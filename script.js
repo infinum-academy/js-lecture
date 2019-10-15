@@ -1,15 +1,14 @@
 const accounts = [{ balance: 100.5 }, { balance: 0.5 }, { balance: -10.45 }];
+console.log(this);
 
-const negativeAccounts = accounts.reduce(function(pV, account) {
-  if (account.balance < 0) {
-    pV.push(account);
-  }
+function sayHello() {
+  console.log('hello ctx is', this);
 
-  return pV;
-}, []);
+  const saySmthElse = () => {
+    console.log('smth else ctx is', this);
+  };
 
-const negativeAccount = accounts.reduce(function(pV, account) {
-  if (account.balance < 0) {
-    pV = account;
-  }
-}, undefined);
+  saySmthElse();
+}
+
+sayHello.call({ name: 'hello world ' });
