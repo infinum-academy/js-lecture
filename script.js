@@ -1,17 +1,13 @@
-let name = '';
+const array = [1, 2, 3, 4, 5, 6, 7, 8];
 
-function doWork() {
-  const nameTitle = document.createElement('h1');
-  nameTitle.innerText = name;
-  document.body.append(nameTitle);
-}
+const count = array.reduce(function(acc, curr) {
+  if (curr % 2 === 0) {
+    acc++;
+  }
 
-function storeName(e) {
-  name = e.target.value;
-}
+  return acc;
+}, 0);
 
-const btn = document.getElementsByClassName('js-btn');
-const input = document.getElementsByClassName('js-name');
-
-btn[0].addEventListener('click', doWork);
-input[0].addEventListener('change', storeName);
+const sum = array.reduce(function(acc, curr) {
+  return acc + curr;
+});
