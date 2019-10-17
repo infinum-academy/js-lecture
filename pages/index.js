@@ -1,28 +1,24 @@
 import React from 'react';
 
-function Name({ name }) {
-  return <h1>{name}</h1>;
-}
-
 function Index() {
-  const [value, setValue] = React.useState('slovenija');
+  const [count, setCount] = React.useState(1);
+  const [devidedCount, setDividedCount] = React.useState(0);
 
-  function onButtonClick() {
-    console.log('button clicked', value);
+  function inc() {
+    setDividedCount(count / 2);
+    setCount(count + 1);
   }
 
-  function onInputChange(e) {
-    setValue(e.target.value);
+  function dec() {
+    setCount(count - 1);
   }
 
   return (
     <div>
-      <Name name="andrei" />
-      <h1>Hello world</h1>
-      <input type="text" onChange={onInputChange} value={value} />
-      <button onClick={onButtonClick}>
-        Click me
-      </button>
+      <h1>Count is: {count}</h1>
+      <h1>Devided Count is: {devidedCount}</h1>
+      <button onClick={dec}>- Dec</button>
+      <button onClick={inc}>+ Inc</button>
     </div>
   );
 }
