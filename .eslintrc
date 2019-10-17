@@ -11,6 +11,7 @@
     "react/jsx-sort-props": [0],
     "lines-around-comment": [0],
     "react/no-multi-comp": [0],
-    "react/prop-types": [0]
+    "react/prop-types": [0],
+    "no-undef": [0]
   }
 }

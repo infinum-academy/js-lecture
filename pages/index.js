@@ -1,24 +1,26 @@
 import React from 'react';
+import fetch from 'isomorphic-fetch';
+
+function getShows() {
+  return fetch('https://api.infinum.academy/api/shows')
+    .then((res) => res.json());
+}
 
 function Index() {
-  const [count, setCount] = React.useState(1);
-  const [devidedCount, setDividedCount] = React.useState(0);
+  const [shows, setShows] = React.useState([]);
+  const [shouldRefresh, setShouldRefresh] = React.useState(false);
+  React.useEffect(() => {
+    getShows().then(({ data }) => setShows(data));
+  }, [shouldRefresh]);
 
-  function inc() {
-    setDividedCount(count / 2);
-    setCount(count + 1);
-  }
-
-  function dec() {
-    setCount(count - 1);
+  function onRefreshClick() {
+    setShouldRefresh(!shouldRefresh);
   }
 
   return (
     <div>
-      <h1>Count is: {count}</h1>
-      <h1>Devided Count is: {devidedCount}</h1>
-      <button onClick={dec}>- Dec</button>
-      <button onClick={inc}>+ Inc</button>
+      <h1>{shows.length}</h1>
+      <button onClick={onRefreshClick}>refresh</button>
     </div>
   );
 }
