@@ -1,8 +1,9 @@
 import { css } from '@emotion/core';
 
 const containerStyle = css`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
 `;
 
 const boxStyle = css`
@@ -19,6 +20,11 @@ function Box() {
 function Styled() {
   return (
     <div css={containerStyle}>
+      <Box />
+      <Box />
+      <Box />
+      <Box />
+      <Box />
       <Box />
       <Box />
       <Box />
