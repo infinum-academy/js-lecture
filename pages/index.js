@@ -1,4 +1,5 @@
 import React from 'react';
+import {useAsync} from 'react-use';
 import fetch from 'isomorphic-fetch';
 
 function getShows() {
@@ -7,20 +8,17 @@ function getShows() {
 }
 
 function Index() {
-  const [shows, setShows] = React.useState([]);
-  const [shouldRefresh, setShouldRefresh] = React.useState(false);
-  React.useEffect(() => {
-    getShows().then(({ data }) => setShows(data));
-  }, [shouldRefresh]);
+  const [sR, setSR] = React.useState(false);
+  const {value} = useAsync(getShows, [sR]);
 
-  function onRefreshClick() {
-    setShouldRefresh(!shouldRefresh);
+  function onRClick() {
+    setSR(!sR);
   }
 
   return (
     <div>
-      <h1>{shows.length}</h1>
-      <button onClick={onRefreshClick}>refresh</button>
+      {value && value.data.length}
+      <button onClick={onRClick}>refresh</button>
     </div>
   );
 }
