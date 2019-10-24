@@ -16,7 +16,6 @@ function Box() {
   return <div css={boxStyle} />;
 }
 
-
 function Styled() {
   return (
     <div css={containerStyle}>
