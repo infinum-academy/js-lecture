@@ -1,4 +1,7 @@
 import { css } from '@emotion/core';
+import {observer} from 'mobx-react';
+
+import appStore from '../store/AppStore';
 
 const containerStyle = css`
   display: grid;
@@ -19,6 +22,7 @@ function Box() {
 function Styled() {
   return (
     <div css={containerStyle}>
+      {appStore.shows.length}
       <Box />
       <Box />
       <Box />
@@ -31,4 +35,4 @@ function Styled() {
   );
 }
 
-export default Styled;
+export default observer(Styled);

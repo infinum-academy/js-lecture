@@ -1,6 +1,7 @@
 import {observer} from 'mobx-react';
 import fetch from 'isomorphic-fetch';
 import {useAsync} from 'react-use';
+import Link from 'next/link';
 
 import appStore from '../store/AppStore';
 
@@ -9,7 +10,7 @@ async function getShows() {
     .then((res) => res.json())
     .then(({ data = [] }) => data);
 
-  appStore.shows.replace(shows);
+  appStore._shows.replace(shows);
 }
 
 function Index() {
@@ -19,13 +20,16 @@ function Index() {
     <div>
       {loading && <h1>Shows are loading...</h1>}
       {
-        appStore.shows.map(({ _id, title, imageUrl }) => (
-          <div key={_id}>
-            <img src={`https://api.infinum.academy/${imageUrl}`} />
+        appStore.shows.map(({ id, title, imageUrl }) => (
+          <div key={id}>
+            <img alt="cover" src={imageUrl} />
             <h1>{title}</h1>
           </div>
         ))
       }
+      <Link href="/styled">
+        <a>go there</a>
+      </Link>
     </div>
   );
 }
