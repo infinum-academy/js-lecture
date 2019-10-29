@@ -1,7 +1,8 @@
+import React from 'react';
 import { css } from '@emotion/core';
 import {observer} from 'mobx-react';
 
-import appStore from '../store/AppStore';
+import {AppStoreCtx} from '../store/context';
 
 const containerStyle = css`
   display: grid;
@@ -20,6 +21,8 @@ function Box() {
 }
 
 function Styled() {
+  const appStore = React.useContext(AppStoreCtx);
+
   return (
     <div css={containerStyle}>
       {appStore.shows.length}

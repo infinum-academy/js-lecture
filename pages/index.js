@@ -1,11 +1,12 @@
+import React from 'react';
 import { observer } from 'mobx-react';
 import fetch from 'isomorphic-fetch';
 import { useAsync } from 'react-use';
 import Link from 'next/link';
 
-import appStore from '../store/AppStore';
+import {AppStoreCtx} from '../store/context';
 
-async function getShows() {
+async function getShows(appStore) {
   const shows = await fetch('https://api.infinum.academy/api/shows')
     .then((res) => res.json())
     .then(({ data = [] }) => data);
@@ -14,11 +15,11 @@ async function getShows() {
 }
 
 function Index() {
-  const { loading } = useAsync(getShows);
+  const appStore = React.useContext(AppStoreCtx);
+  useAsync(() => getShows(appStore), [appStore]);
 
   return (
     <div>
-      {loading && <h1>Shows are loading...</h1>}
       {appStore.shows.map(({ id, title }) => (
         <div key={id}>
           <h1>{title}</h1>
