@@ -1,6 +1,6 @@
-import {observer} from 'mobx-react';
+import { observer } from 'mobx-react';
 import fetch from 'isomorphic-fetch';
-import {useAsync} from 'react-use';
+import { useAsync } from 'react-use';
 import Link from 'next/link';
 
 import appStore from '../store/AppStore';
@@ -14,19 +14,17 @@ async function getShows() {
 }
 
 function Index() {
-  const {loading} = useAsync(getShows);
+  const { loading } = useAsync(getShows);
 
   return (
     <div>
       {loading && <h1>Shows are loading...</h1>}
-      {
-        appStore.shows.map(({ id, title, imageUrl }) => (
-          <div key={id}>
-            <img alt="cover" src={imageUrl} />
-            <h1>{title}</h1>
-          </div>
-        ))
-      }
+      {appStore.shows.map(({ id, title, imageUrl }) => (
+        <div key={id}>
+          <img alt="cover" src={imageUrl} />
+          <h1>{title}</h1>
+        </div>
+      ))}
       <Link href="/styled">
         <a>go there</a>
       </Link>
