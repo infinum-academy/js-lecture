@@ -1,41 +1,22 @@
 import React from 'react';
 
-function useComplexState(initValue) {
-  const [internalState, setInternalState] = React.useState(initValue);
+function useInput(initValue) {
+  const [value, setValue] = React.useState(initValue);
 
-  function setState(patch) {
-    setInternalState({
-      ...internalState,
-      ...patch,
-    });
+  function onInputChange(e) {
+    setValue(e.target.value);
   }
 
-  return [internalState, setState];
+  return [value, onInputChange];
 }
 
 function Hook() {
-  const [state, setState] = useComplexState({
-    email: '',
-    password: '',
-  });
-
-  function onEmailChange(e) {
-    setState({
-      email: e.target.value,
-    });
-  }
-
-  function onPasswordChange(e) {
-    setState({
-      password: e.target.value,
-    });
-  }
+  const [email, setEmail] = useInput('');
 
   return (
     <div>
-      <h1>{state.email} {state.password}</h1>
-      <input type="email" onChange={onEmailChange} value={state.email} placeholder="email" />
-      <input type="password" onChange={onPasswordChange} value={state.password} placeholder="password" />
+      <h1>{email}</h1>
+      <input type="email" onChange={setEmail} value={email} placeholder="email" />
     </div>
   );
 }
