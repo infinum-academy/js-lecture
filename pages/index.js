@@ -10,7 +10,7 @@ async function getShows() {
     .then((res) => res.json())
     .then(({ data = [] }) => data);
 
-  appStore._shows.replace(shows);
+  appStore.shows.replace(shows);
 }
 
 function Index() {
@@ -19,9 +19,8 @@ function Index() {
   return (
     <div>
       {loading && <h1>Shows are loading...</h1>}
-      {appStore.shows.map(({ id, title, imageUrl }) => (
+      {appStore.shows.map(({ id, title }) => (
         <div key={id}>
-          <img alt="cover" src={imageUrl} />
           <h1>{title}</h1>
         </div>
       ))}
