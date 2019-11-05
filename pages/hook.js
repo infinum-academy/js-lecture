@@ -1,22 +1,23 @@
 import React from 'react';
 
-function useInput(initValue) {
-  const [value, setValue] = React.useState(initValue);
+function useCounter(initValue) {
+  const [count, setCount] = React.useState(initValue);
 
-  function onInputChange(e) {
-    setValue(e.target.value);
+  function onCount(direction) {
+    return () => setCount(count + direction);
   }
 
-  return [value, onInputChange];
+  return [count, onCount(1), onCount(-1)];
 }
 
 function Hook() {
-  const [email, setEmail] = useInput('');
+  const [count, countUp, countDown] = useCounter(0);
 
   return (
     <div>
-      <h1>{email}</h1>
-      <input type="email" onChange={setEmail} value={email} placeholder="email" />
+      <h1>{count}</h1>
+      <button onClick={countUp}>Count UP!</button>
+      <button onClick={countDown}>Count DOWN!</button>
     </div>
   );
 }
