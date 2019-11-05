@@ -3,11 +3,11 @@ import React from 'react';
 function useCounter(initValue) {
   const [count, setCount] = React.useState(initValue);
 
-  function onCount(direction) {
+  function onCount(direction = 1) {
     return () => setCount(count + direction);
   }
 
-  return [count, onCount(1), onCount(-1)];
+  return [count, onCount(), onCount(-1)];
 }
 
 function Hook() {
