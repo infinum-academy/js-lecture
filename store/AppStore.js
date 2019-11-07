@@ -4,4 +4,4 @@ class AppStore {
   @observable shows = [];
 }
 
-export default new AppStore();
+export default AppStore;
